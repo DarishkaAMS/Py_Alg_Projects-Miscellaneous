@@ -1,0 +1,30 @@
+class BinarySearch:
+    def shipWithinDays(self, weights, D):
+        
+        # if len(weights) == D: # Just to check )
+        #     return D
+        
+        low_bound = max(weights)	
+        hight_bound = low_bound * len(weights) // D
+        # print(low_bound, hight_bound)
+        
+        while low_bound < hight_bound:
+            mid = (low_bound + hight_bound) // 2
+            total, res = 0, 1
+            
+            for wt in weights:
+                if total + wt > mid:
+                    res += 1
+                    total = wt
+                else:
+                    total += wt
+            
+            if res <= D:
+                hight_bound = mid
+            else:
+                low_bound = mid+1
+
+        return low_bound
+
+# Check - print(BinarySearch.shipWithinDays(0, weights =[70,259,379,369,287,145,259,29,150,410,493,121,184,92,79,168,269,209,139,437], D = 20))
+#Cargo task
